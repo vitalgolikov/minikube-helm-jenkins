@@ -1,0 +1,37 @@
+# Vargant env
+  has been founded https://github.com/kmitsolution/k8s
+  1) environment has being deployed, but my PC freezing and I unfortunately decided to use minikube
+
+
+# Prepare my minikube to test
+
+   Create namestape
+   kubectl apply -f jenkins-namespace.yaml
+   Create Persistant volume
+   kubectl apply -f jenkins-volume.yaml
+   Create Service Account
+   kubectl apply -f jenkins-sa.yaml
+
+# Deploy with helm
+
+    helm show values jenkins/jenkins
+    helm show values jenkins/jenkins > values.yaml
+    change values persistence:
+    change values serviceAccount:
+    set to my minikube test ServiceType  NodePort
+
+    helm install jenkins -n jenkins -f values.yaml jenkins/jenkins
+
+# Some troubleshooting
+     kubectl logs -n jenkins jenkins-0 init
+     minikube ssh
+     sudo chown -R 1000:1000 /data/jenkins-volume
+
+
+# Working with UI
+   get url
+   get admin pass
+   connect slave agent
+   set label agent
+
+#Run Stage "hello-world"

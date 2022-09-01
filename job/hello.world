@@ -1,0 +1,23 @@
+#!groovy
+// Run docker build
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent {
+          label 'test'
+        }
+    options {
+          timestamps()
+    }
+    stages {
+
+        stage("create docker image") {
+            steps {
+                echo " ============== start hello world image =================="
+                sh 'docker run hello-world'
+
+            }
+        }
+
+    }
+}
